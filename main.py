@@ -18,7 +18,9 @@ app.add_middleware(
 
 MODEL_PATH = "house_price_pipeline.joblib"
 model_pipeline = joblib.load(MODEL_PATH) if os.path.exists(MODEL_PATH) else None
-
+@app.get("/")
+async def root():
+    return {"status": "online", "message": "Backend API đang hoạt động bình thường!"}
 @app.post("/predict")
 async def predict(
     area: float = Form(...),
